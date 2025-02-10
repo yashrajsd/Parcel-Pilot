@@ -60,20 +60,132 @@ api/
 
 ## Request & Response Formats
 Example request and response formats for key endpoints:
+
+## Assignment
+**GET** /api/assignments/metrics
 ```json
-// Example request for creating an order
-POST /api/orders/assign
 {
-  "orderId": "12345",
-  "partnerId": "67890"
+  "data": [
+    {
+      "_id": "67a9f4875f498ea549da422e",
+      "orderId": "67a9f4875f498ea549da4229",
+      "partnerId": "67a9de6c5f498ea549da4086",
+      "timestamp": "2025-02-10T12:43:51.713Z",
+      "status": "success",
+      "createdAt": "2025-02-10T12:43:51.715Z",
+      "updatedAt": "2025-02-10T12:53:13.403Z",
+      "__v": 0
+    }
+  ]
 }
 
-// Example response
+```
+**GET** /api/assignments/metrics
+```json
 {
-  "success": true,
-  "message": "Order assigned successfully"
+  "data": [
+    {
+      "_id": "67a9f9b5986058d1c6047615",
+      "date": "2025-02-10",
+      "totalAssigned": 7,
+      "successRate": 0.16666666666666666,
+      "success": 1,
+      "failure": 2,
+      "failureReasons": [
+        {
+          "reason": "Not responded",
+          "count": 2,
+          "_id": "67a9fceb986058d1c604775f"
+        }
+      ],
+      "createdAt": "2025-02-10T13:05:57.605Z",
+      "updatedAt": "2025-02-10T15:23:06.322Z",
+      "__v": 1
+    }
+  ]
+}
+
+
+```
+## Orders
+**POST** /api/orders/assign
+```json
+//Request body
+{
+  "customer": "John Doe",
+  "area": "Downtown",
+  "items": [
+    {
+      "name": "Pizza",
+      "quantity": 2,
+      "price": 12.99
+    },
+    {
+      "name": "Burger",
+      "quantity": 1,
+      "price": 8.99
+    }
+  ],
+  "totalAmount": 34.97
 }
 ```
+**PUT** /api/orders/status/:id
+```json
+//Request body
+
+//Updating an order status to "delivered" | "assigned" | "picked"
+{
+  "status": "delivered"
+}
+
+//Updating an order back to "pending" ie failure
+{
+  "status": "pending",
+  "reason": "Not responded"
+}
+```
+**GET** /api/orders
+```json
+//Response body
+{
+  "customer": {
+    "name": "Romi Dsuza",
+    "phone": "+91 7248007517",
+    "address": "Hiranandani Gardens, Bandra, Mumbai"
+  },
+  "_id": "67a9df4b5f498ea549da40cb",
+  "orderNumber": "ORD-1739185995278-3993",
+  "area": "Bandra",
+  "items": [
+    {
+      "name": "Laptop Bag",
+      "quantity": 2,
+      "price": 3000,
+      "_id": "67a9df4b5f498ea549da40cc"
+    },
+    {
+      "name": "Wireless Mouse",
+      "quantity": 1,
+      "price": 1200,
+      "_id": "67a9df4b5f498ea549da40cd"
+    }
+  ],
+  "status": "delivered",
+  "scheduledFor": "Mon Feb 10 2025 20:00:00 GMT+0530 (India Standard Time)",
+  "assignedTo": "67a9de6c5f498ea549da4086",
+  "totalAmount": 4200,
+  "createdAt": "2025-02-10T11:13:16.039Z",
+  "updatedAt": "2025-02-10T11:25:46.555Z",
+  "__v": 0
+}
+```
+## Partners
+
+**GET** /api/partners
+
+
+
+
 
 ## Error Handling
 - `400 Bad Request` - Invalid request parameters
