@@ -1,9 +1,9 @@
 import { DeliveryRegion } from "@/lib/db/models/DeliveryRegion";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: Request, context: { params: { id: string } }) {
+export async function GET(req: NextRequest) {
     try {
-        const { id } = context.params; // ✅ Correct way to get the ID
+        const id = req.nextUrl.pathname.split('/').pop()
 
         if (!id) {
             return NextResponse.json({ message: "Region ID is required" }, { status: 400 });

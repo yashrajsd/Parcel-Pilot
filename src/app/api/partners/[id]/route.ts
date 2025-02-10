@@ -1,14 +1,14 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { DeliveryPartner } from "@/lib/db/models/DeliveryPartner";
 import dbconnect from "@/lib/db/connect";
 
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest) {
     try {
         dbconnect();
 
         const updateData = await req.json(); 
-        const { id } = await params; 
+        const id = req.nextUrl.pathname.split('/').pop()
 
         if (!id) {
             return NextResponse.json({ status: 400, message: "Missing ID" });
@@ -30,11 +30,11 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     }
 }
 
-export async function DELETE({ params }: { params: { id: string } }) {
+export async function DELETE(req:NextRequest) {
     try {
         dbconnect(); 
         
-        const { id } = await params; 
+        const id = req.nextUrl.pathname.split('/').pop()
 
         if (!id) {
             return NextResponse.json({ status: 400, message: "Missing ID" });

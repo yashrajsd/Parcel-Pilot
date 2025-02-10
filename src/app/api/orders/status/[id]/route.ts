@@ -4,11 +4,11 @@ import { Order } from '@/lib/db/models/Order';
 import { Assignment } from '@/lib/db/models/Assignment';
 import { AssignmentMetrics } from '@/lib/db/models/AssignmetnMetrics';
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest) {
     try {
         await dbconnect();
         
-        const { id } = params; 
+        const id = req.nextUrl.pathname.split('/').pop()
         const { status, reason } = await req.json();
 
         const validStatuses = ['pending', 'assigned', 'picked', 'delivered'];
