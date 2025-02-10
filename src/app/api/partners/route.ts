@@ -3,6 +3,7 @@ import { DeliveryPartner } from "@/lib/db/models/DeliveryPartner";
 import { DeliveryRegion } from "@/lib/db/models/DeliveryRegion";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
 export async function GET() {
     try {
         await dbconnect(); 

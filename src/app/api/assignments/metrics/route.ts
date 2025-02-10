@@ -1,6 +1,7 @@
 import { AssignmentMetrics } from "@/lib/db/models/AssignmetnMetrics"
 import { NextResponse } from "next/server"
 
+export const dynamic = 'force-dynamic';
 export async function GET() {
     try{
         const data = await AssignmentMetrics.find().sort({"timestamp":1}).limit(30);

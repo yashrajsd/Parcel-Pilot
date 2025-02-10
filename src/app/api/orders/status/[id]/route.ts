@@ -4,6 +4,7 @@ import { Order } from '@/lib/db/models/Order';
 import { Assignment } from '@/lib/db/models/Assignment';
 import { AssignmentMetrics } from '@/lib/db/models/AssignmetnMetrics';
 
+export const dynamic = 'force-dynamic';
 export async function PUT(req: NextRequest) {
     try {
         await dbconnect();

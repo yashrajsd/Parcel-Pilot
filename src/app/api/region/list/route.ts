@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { DeliveryRegion } from "../../../../lib/db/models/DeliveryRegion";
 import dbconnect from "@/lib/db/connect";
+
+export const dynamic = 'force-dynamic';
 export async function GET() {
     try {
         await dbconnect();
