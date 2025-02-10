@@ -3,7 +3,7 @@ import { DeliveryRegion } from "../../../../lib/db/models/DeliveryRegion";
 import dbconnect from "@/lib/db/connect";
 export async function GET() {
     try {
-        dbconnect();
+        await dbconnect();
         const regions = await DeliveryRegion.find()
             .lean();
         const sortedRegions = regions.sort((a, b) => a.deliveryPartners.length - b.deliveryPartners.length);
