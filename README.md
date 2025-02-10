@@ -1,37 +1,95 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pilot Parcel API
 
-## Getting Started
+## Overview
+Pilot Parcel API provides endpoints to manage assignments, orders, partners, and regions. This documentation outlines the API structure and available endpoints.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## API Structure
+```
+api/
+  ├── assignments/
+  │   ├── metrics/
+  │   │   ├── route.ts
+  │   ├── run/
+  │   │   ├── route.ts
+  │   ├── route.ts
+  │
+  ├── orders/
+  │   ├── assign/
+  │   │   ├── route.ts
+  │   ├── status/[id]/
+  │   │   ├── route.ts
+  │   ├── route.ts
+  │
+  ├── partners/
+  │   ├── [id]/
+  │   │   ├── route.ts
+  │   ├── route.ts
+  │
+  ├── region/
+  │   ├── [id]/
+  │   │   ├── route.ts
+  │   ├── list/
+  │   │   ├── route.ts
+  │   ├── route.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## API Endpoints
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Assignments
+- **GET /api/assignments/metrics** - Retrieve assignment metrics.
+- **POST /api/assignments/run** - Execute an assignment.
+- **GET /api/assignments** - Retrieve lastest assignments.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Orders
+- **POST /api/orders/assign** - Assign an order.
+- **PUT /api/orders/status/:id** - Update the status of the order ( pending | assigned | picked | delivered )
+- **GET /api/orders** - Retrieve all orders list.
 
-## Learn More
+### Partners
+- **GET /api/partners** - Retrieve a list of partners.
+- **POST /api/partners** - Create a new partner.
+- **PUT /api/partners/:id** - Update the partner info.
+- **DELETE /api/partners/:id** - Delete user.
 
-To learn more about Next.js, take a look at the following resources:
+### Region
+- **GET /api/region** - Retrieve a list of available regions ( less data ).
+- **POST /api/region** - Add a new region.
+- **GET /api/region/:id** - Retrieves the best shift time for delivery partner (start time - end time).
+- **GET /api/region/list** - Retrieve a list of available regions ( complete data ).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Request & Response Formats
+Example request and response formats for key endpoints:
+```json
+// Example request for creating an order
+POST /api/orders/assign
+{
+  "orderId": "12345",
+  "partnerId": "67890"
+}
 
-## Deploy on Vercel
+// Example response
+{
+  "success": true,
+  "message": "Order assigned successfully"
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Error Handling
+- `400 Bad Request` - Invalid request parameters
+- `401 Unauthorized` - Authentication failed
+- `404 Not Found` - Resource not found
+- `500 Internal Server Error` - Unexpected server error
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# pilot-parcel
+## Installation & Setup
+To set up the project locally:
+```sh
+git clone https://github.com/yashrajsd/pilot-parcel.git
+cd pilot-parcel
+npm install
+npm run dev
+```
+
+
+
+
