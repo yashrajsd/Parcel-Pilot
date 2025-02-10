@@ -22,7 +22,7 @@ async function findBestPartner(area: string) {
     const partners = await DeliveryPartner.find({
         areas: { $in: [area] },
         currentLoad: { $lt: 3 },
-    });
+    }).sort({currentLoad:1});
 
     let bestPartner = null;
     let bestHour = null;

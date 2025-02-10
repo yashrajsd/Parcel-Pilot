@@ -7,7 +7,6 @@ import { AssignmentMetrics } from '@/lib/db/models/AssignmetnMetrics';
 export async function PUT(req: NextRequest) {
     try {
         await dbconnect();
-        
         const id = req.nextUrl.pathname.split('/').pop()
         const { status, reason } = await req.json();
 
