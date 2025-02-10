@@ -70,6 +70,13 @@ const config: Config = {
   				ring: 'hsl(var(--sidebar-ring))'
   			}
   		},
+		  fontFamily: {
+			aeonik: [
+				'Aeonik',
+				'Arial',
+				'sans-serif'
+			]
+		},
   		keyframes: {
   			'accordion-down': {
   				from: {

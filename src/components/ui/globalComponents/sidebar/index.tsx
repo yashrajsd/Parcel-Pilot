@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image';
 import React, { useState } from 'react';
-import Logo from '../../../../public/asset/images/logo.jpg';
+import Logo from '../../../../../public/asset/images/logo.png';
 import SIDE_BTNS from '@/constants/sidebar';
 import Link from 'next/link';
 import ClerkAuthState from '../clerk-auth-state';

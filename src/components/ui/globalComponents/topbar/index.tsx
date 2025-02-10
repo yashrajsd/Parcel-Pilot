@@ -3,7 +3,7 @@ import type React from 'react';
 import { useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Logo from '../../../../public/asset/images/logo.jpg';
+import Logo from '../../../../../public/asset/images/logo.jpg';
 import SIDE_BTNS from '@/constants/sidebar';
 import ClerkAuthState from '../clerk-auth-state';
 
