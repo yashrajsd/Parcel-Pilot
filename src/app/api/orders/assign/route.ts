@@ -22,8 +22,9 @@ async function generateUniqueOrderNumber() {
 async function findBestPartner(area: string) {
     const partners = await DeliveryPartner.find({
         areas: { $in: [area] },
-        currentLoad: { $lt: 3 },
-    }).sort({currentLoad:1});
+        currentLoad: { $lt: 3 }, 
+    })
+    .sort({ currentLoad: 1, "metrics.completedOrders": -1 });
 
     let bestPartner = null;
     let bestHour = null;
@@ -44,6 +45,7 @@ async function findBestPartner(area: string) {
 
     return { bestPartner, bestHour };
 }
+
 
 export async function POST(req: Request) {
     try {

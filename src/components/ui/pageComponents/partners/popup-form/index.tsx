@@ -133,6 +133,33 @@ const PopupForm: React.FC<POPUPFORM> = ({ profile, setProfile }) => {
             });
         }
     };
+    const handleDelete = async () => {
+        if (!profile) return;
+        
+        const confirmDelete = confirm("Are you sure you want to delete this profile?");
+        if (!confirmDelete) return;
+    
+        setLoading(true);
+        try {
+            const response = await fetch(`/api/partners/${profile._id}`, {
+                method: "DELETE",
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                alert(data.message);
+                setProfile(null);
+            } else {
+                const data = await response.json();
+                alert(`Error: ${data.message}`);
+            }
+        } catch (err) {
+            console.error("Error deleting profile:", err);
+            alert("Failed to delete profile. Please try again.");
+        }
+        setLoading(false);
+    };
+    
 
     const handleShift = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         if (e.target.name == "start") {
@@ -272,9 +299,15 @@ const PopupForm: React.FC<POPUPFORM> = ({ profile, setProfile }) => {
                 </div>
 
                 {/* Footer (Sticky) */}
-                <div className="sticky bottom-0 w-full z-[99] p-5 flex justify-end gap-2 items-center bg-white shadow-md">
+                <div className="sticky bottom-0 w-full z-[99] p-5 flex justify-between gap-2 items-center bg-white shadow-md">
+                    <div className='flex items-center gap-2'>
+                        <button className='p-2 border-[#FF4242] border-[1px] text-[#FF4242] border-[1px] rounded-lg' onClick={handleDelete}>Delete</button>
+                        <p className='text-[0.8rem] opacity-60'>Will pemanantly delete the partner</p>
+                    </div>
+                    <div className='flex items-center gap-2'>
                     <button className="p-2 text-[#131313] opacity-70 border-[1px] rounded-lg flex items-center gap-2" onClick={handleReset} disabled={loading}><RotateCcw className='h-5' /> Reset</button>
-                    <button className="p-2 border-[1px] bg-[#4F60FF] rounded-lg" disabled={loading} onClick={handleUpdate}>Update Profile</button>
+                    <button className="p-2 border-[1px] text-white bg-[#4F60FF] rounded-lg" disabled={loading} onClick={handleUpdate}>Update Profile</button>
+                    </div>
                 </div>
 
             </div>
