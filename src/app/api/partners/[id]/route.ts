@@ -3,7 +3,7 @@ import { DeliveryPartner } from "@/lib/db/models/DeliveryPartner";
 import dbconnect from "@/lib/db/connect";
 import { DeliveryRegion } from "@/lib/db/models/DeliveryRegion";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 export async function PUT(req: NextRequest) {
     try {
         dbconnect();

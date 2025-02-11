@@ -6,7 +6,7 @@ import { DeliveryRegion } from "@/lib/db/models/DeliveryRegion";
 import { Order } from "@/lib/db/models/Order";
 import { NextResponse } from "next/server";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 async function generateUniqueOrderNumber() {
     let orderNumber: string = "";
     let exists: boolean = true;
